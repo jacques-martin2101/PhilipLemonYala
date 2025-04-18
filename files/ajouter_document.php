@@ -19,7 +19,11 @@ if (isset($_GET['id_etudiant'])){
     $id_etudiant = intval($_GET['id_etudiant']); //securisation avec intval
 
     // Preparation de la requete pour chercher l'etudiant
-    $sql = "SELECT * FROM etudiants WHERE id = ?";
+    $sql = "SELECT utilisateurs.nom, utilisateurs.matricule 
+        FROM etudiants 
+        INNER JOIN utilisateurs ON etudiants.utilisateur_id = utilisateurs.utilisateur_id 
+        WHERE etudiants.id_etudiant = ?
+    ";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_etudiant);
     $stmt->execute();
@@ -50,9 +54,9 @@ if (isset($_GET['id_etudiant'])){
         <body>
             <h2>Ajout de documents pour 
                 <?php 
-            echo htmlspecialchars($etudiant['id']); ?> 
+            echo htmlspecialchars($etudiant['nom']); ?> 
             (Matricule : <?php
-            echo htmlspecialchars($etudiant['faculte']); ?>)</h2>
+            echo htmlspecialchars($etudiant['matricule']); ?>)</h2>
             
             <form action="traitement_ajout_document.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_etudiant" value="<?php echo $id_etudiant; ?>">
@@ -74,5 +78,6 @@ if (isset($_GET['id_etudiant'])){
         </body>
         </html>
 
-
+<?php
+// Fermer la connexion  
 ?>
