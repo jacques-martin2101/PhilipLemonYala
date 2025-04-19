@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $niveau = $_POST["niveau"];
         $mot_de_passe = password_hash("123456", PASSWORD_BCRYPT);
 
-        $check = $conn->prepare("SELECT id FROM utilisateurs WHERE matricule = ? OR email = ?");
+        $check = $conn->prepare("SELECT utilisateur_id FROM utilisateurs WHERE matricule = ? OR email = ?");
         $check->bind_param("ss", $matricule, $email);
         $check->execute();
         $check->store_result();

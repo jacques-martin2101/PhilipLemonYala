@@ -64,17 +64,22 @@ if (isset($_GET['id_etudiant'])){
                 <label for="document">Attestation de réussite :</label>
                 <input type="file" name="document" id="document" required><br><br>
 
-                <label for="photo">Photo d'identité :</label>
-                <input type="file" name="photo" required><br>
-
                 <button type="submit">Valider</button>
             </form>
 
+            <?php
+            var_dump($id_etudiant);
+            ?>
             <!-- Bouton d'annulation -->
-            <form action="traitement/annulation_inscription.php" method="POST" onsubmit="return confirm('Êtes-vous sûr d’annuler cette inscription ?');">
-                <input type="hidden" name="matricule" value="<?= htmlspecialchars($matricule) ?>">
-                <button type="submit" style="background-color:red; color:white;">Annuler l'inscription</button>
+            <form>
+                <a href="traitement/annulation_inscription.php?id_etudiant=<?php echo $id_etudiant; ?>" name="id_etudiant"
+                id="id_etudiant" style="color:red" onclick="return confirm('Etes-vous sûr de vouloir annuler l\'inscription de cet étudiant ?');">
+                Annuler l'inscription</a>
             </form>
+
+            <!-- Lien vers la page d'accueil -->
+            <p><a href="ajout_etudiant.php">Retour à la page d'accueil</a></p>
+            <p><a href="ajout_document.php">Ajouter un autre document</a></p>
         </body>
         </html>
 
