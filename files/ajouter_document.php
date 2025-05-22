@@ -44,6 +44,41 @@ if (isset($_GET['id_etudiant'])){
         exit();
     }
 
+    // Traitement du formulaire d'envoi
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Crée le dossier upload s'il n'existe pas
+        if (!is_dir("uploads")) {
+            mkdir("uploads");
+        }
+
+        $chemin_document = "";
+        
+
+        // Upload de l'attestation
+        if (isset($_FILES['chemin_document']) && $_FILES['chemin_document']['error'] === UPLOAD_ERR_OK) {
+            $attestationPath = 'uploads/' . basename($_FILES['chemin_document']['name']);
+            move_uploaded_file($_FILES['chemin_document']['tmp_name'], $attestationPath);
+        }
+
+        // Upload de la photo d'identité
+        if (isset($_FILES['chemin_document']) && $_FILES['chemin_document']['error'] === UPLOAD_ERR_OK) {
+            $photoPath = 'uploads/' . basename($_FILES['photo']['name']);
+            move_uploaded_file($_FILES['chemin_document']['tmp_name'], $chemin_document);
+        }
+
+        // Enregistrer les chemins en base
+        $sql_insert = "INSERT INTO documents (etudiant_id, attestation, photo_identite) VALUES (?, ?, ?)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bind_param("iss", $id_etudiant, $attestationPath, $photoPath);
+        if ($stmt_insert->execute()) {
+            header("Location: ../ajouter_etudiant.php?message=Inscription annulée.");
+            exit();
+        } else {
+            echo "Erreur lors de l'enregistrement.";
+        }
+        $stmt_insert->close();
+    }
+
     $conn->close();
         ?>
         <!DOCTYPE html>
