@@ -32,6 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="form-group">
             <label for="montant">Montant:</label>
             <input type="number" class="form-control" id="montant" name="montant" required>
+            <label for="mode_paiement">Mode de Paiement:</label>
+            <select id="mode_paiement" name="mode_paiement" required>
+                <option value="carte_bancaire">Carte Bancaire</option>
+                <option value="paypal">PayPal</option>
+                <option value="virement_bancaire">Virement Bancaire</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="date">Date de Paiement:</label>

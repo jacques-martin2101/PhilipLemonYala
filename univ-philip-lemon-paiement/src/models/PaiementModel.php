@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 
 
 class Paiement {
@@ -50,4 +51,8 @@ class Paiement {
     public static function findByEtudiantId($etudiantId) {
         // Logique pour trouver tous les paiements d'un étudiant par ID
     }
+}
+
+class PaiementModel {
+    // Ajoute ici tes méthodes et propriétés
 }

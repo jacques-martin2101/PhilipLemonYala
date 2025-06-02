@@ -22,11 +22,11 @@ switch ($request) {
         // Redirection vers la page de paiement
         header('Location: paiement.php');
         exit;
-        $paiementController = new PaiementController( new Paiement($montant, $etudiantId));
+        $paiementController = new PaiementController( new PaiementModel($montant, $etudiantId));
         $paiementController->showForm();
         break;
     case 'paiement.php':
-        $paiementController = new PaiementController( new Paiement($montant, $etudiantId));
+        $paiementController = new PaiementController( new PaiementModel($montant, $etudiantId));
         $paiementController->showForm();
         break;
     case 'rapport.php':
