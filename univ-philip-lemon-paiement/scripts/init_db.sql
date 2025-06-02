@@ -1,9 +1,13 @@
 CREATE TABLE etudiants (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
+    postnom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    date_inscription DATE NOT NULL
+    telephone VARCHAR(30) NOT NULL,
+    doc VARCHAR(255) NOT NULL,
+    niveau_etude ENUM('licence', 'master', 'doctorat') NOT NULL,
+    date_inscription DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE paiements (
