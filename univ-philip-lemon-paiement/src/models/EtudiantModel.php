@@ -23,4 +23,17 @@ class EtudiantModel
         $stmt->bind_param("sssssss", $this->nom, $this->postnom, $this->prenom, $this->email, $this->telephone, $this->doc, $this->niveau_etude);
         return $stmt->execute();
     }
+
+    public static function getAllWithPaiement($conn) {
+        $sql = "SELECT e.id, e.nom, e.postnom, e.prenom, e.telephone, e.niveau_etude,
+                       CASE WHEN p.id IS NOT NULL THEN 'Payé' ELSE 'Non payé' END AS frais
+                FROM etudiants e
+                LEFT JOIN paiements p ON e.id = p.etudiant_id";
+        $result = $conn->query($sql);
+        $etudiants = [];
+        while ($row = $result->fetch_assoc()) {
+            $etudiants[] = $row;
+        }
+        return $etudiants;
+    }
 }

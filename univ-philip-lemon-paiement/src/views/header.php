@@ -12,12 +12,14 @@
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
-                <li><a href="paiement.php">Paiement</a></li>
-                <li><a href="rapport.php">Rapports</a></li>
                 <li><a href="inscription.php">Inscription</a></li>
+                <li><a href="etudiants.php">Étudiants</a></li>
+                <li><a href="paiement.php">Paiement</a></li>
+                <!-- <li><a href="rapport.php">Rapports</a></li>
                 <li><a href="deconnexion.php">Déconnexion</a></li>
                 <li><a href="recherche.php">Recherche</a></li>
-                <li><a href="telechargements.php">Téléchargements</a></li>
+                <li><a href="telechargements.php">Téléchargements</a></li> -->
+
                 <!-- <li><a href="newsletter.php">Newsletter</a></li>
                 <li><a href="sitemap.php">Sitemap</a></li> -->
                 

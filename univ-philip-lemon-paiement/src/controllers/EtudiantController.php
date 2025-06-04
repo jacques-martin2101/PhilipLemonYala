@@ -79,6 +79,12 @@ class EtudiantController {
             exit;
         }
     }
+
+    public function liste() {
+        global $conn;
+        $etudiants = EtudiantModel::getAllWithPaiement($conn);
+        include '../src/views/etudiants_liste.php';
+    }
 }
 
 
