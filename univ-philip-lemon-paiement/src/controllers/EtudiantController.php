@@ -2,6 +2,7 @@
 namespace Controllers;
 
 require_once '../src/models/EtudiantModel.php'; 
+require_once '../src/models/PaiementModel.php'; 
 require_once '../config/database.php';
 
 use Models\EtudiantModel;
@@ -28,6 +29,14 @@ class EtudiantController {
             $email = htmlspecialchars($_POST['email']);
             $telephone = htmlspecialchars($_POST['telephone']);
             $niveau_etude = htmlspecialchars($_POST['niveau_etude']);
+
+// Génération automatique du matricule
+$prefix = "04062025";
+$query = "SELECT COUNT(*) AS total FROM etudiants";
+$result = $conn->query($query);
+$row = $result->fetch_assoc();
+$numero = str_pad($row['total'] + 1, 3, "0", STR_PAD_LEFT);
+$matricule = $prefix . $numero;
 
             // Vérification email ou téléphone déjà utilisé
             $stmt = $conn->prepare("SELECT id FROM etudiants WHERE email = ? OR telephone = ?");
@@ -67,7 +76,7 @@ class EtudiantController {
             }
 
             // Création du modèle et insertion
-            $etudiant = new EtudiantModel($nom, $postnom, $prenom, $email, $telephone, $doc, $niveau_etude);
+            $etudiant = new EtudiantModel($matricule, $nom, $postnom, $prenom, $email, $telephone, $doc, $niveau_etude);
             if ($etudiant->enregistrer($conn)) {
                 $_SESSION['notification'] = "L'enregistrement a réussi !";
                 $_SESSION['notification_type'] = "success";
@@ -84,6 +93,17 @@ class EtudiantController {
         global $conn;
         $etudiants = EtudiantModel::getAllWithPaiement($conn);
         include '../src/views/etudiants_liste.php';
+    }
+
+    public function enregistrerPaiement() {
+        global $conn;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['etudiant_id']) && isset($_POST['montant'])) {
+            $etudiant_id = intval($_POST['etudiant_id']);
+            $montant = floatval($_POST['montant']);
+            $paiement = new \Models\PaiementModel($etudiant_id, $montant);
+            $paiement->enregistrer($conn);
+            // Redirection ou message...
+        }
     }
 }
 

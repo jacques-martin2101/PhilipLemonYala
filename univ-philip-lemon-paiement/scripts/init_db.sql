@@ -1,5 +1,6 @@
 CREATE TABLE etudiants (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    matricule VARCHAR(50) NOT NULL UNIQUE,
     nom VARCHAR(100) NOT NULL,
     postnom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,

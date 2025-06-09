@@ -23,27 +23,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <div class="container">
-    <h2>Formulaire de Paiement</h2>
-    <form action="" method="post">
+    <h2>Paiement des frais</h2>
+    <?php if (isset($etudiant)): ?>
+        <h3>Paiement pour : <?= htmlspecialchars($etudiant['nom'] . ' ' . $etudiant['postnom'] . ' ' . $etudiant['prenom']) ?></h3>
+    <?php endif; ?>
+    <form method="post" action="">
         <div class="form-group">
-            <label for="nom">Nom de l'Étudiant:</label>
-            <input type="text" class="form-control" id="nom" name="nom" required>
-        </div>
-        <div class="form-group">
-            <label for="montant">Montant:</label>
-            <input type="number" class="form-control" id="montant" name="montant" required>
-            <label for="mode_paiement">Mode de Paiement:</label>
-            <select id="mode_paiement" name="mode_paiement" required>
-                <option value="carte_bancaire">Carte Bancaire</option>
-                <option value="paypal">PayPal</option>
-                <option value="virement_bancaire">Virement Bancaire</option>
+            <label for="montant">Montant :</label>
+            <select id="montant" name="montant" required>
+                <option value="120">120 $</option>
+                <option value="200">200 $</option>
+                <option value="350">350 $</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label for="date">Date de Paiement:</label>
-            <input type="date" class="form-control" id="date" name="date" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Payer</button>
+        </div><br>
+        
+        <button type="submit">Valider le paiement</button>
     </form>
 </div>
 

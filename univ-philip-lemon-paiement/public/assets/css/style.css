@@ -12,9 +12,8 @@ header {
     text-align: center;
 }
 
-h1 {
-    margin: 0;
-}
+
+
 
 .container {
     width: 80%;
@@ -59,4 +58,167 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sidebar {}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+}
+
+.menu {
+    width: 60px;
+    height: 100%;
+    background-color: #1877f2;
+    float: right;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #fff;
+    overflow: hidden;
+    border-radius: 5px 0 0 5px;
+    transition: width .75s ease;
+}
+
+.menu:hover {
+    width: 200px;
+}
+
+.menu:hover .sidebar {
+    overflow: auto;
+}
+
+.menu:hover nav ul li {
+    display: block;
+}
+
+.menu:hover nav ul li a {
+    display: block;
+    padding: 10px;
+}
+
+.menu:hover nav ul {
+    display: block;
+}
+
+.menu:hover nav ul li {
+    display: block;
+}
+
+.menu:hover nav ul li a {
+    display: block;
+    padding: 10px;
+}
+
+.menu:hover nav ul li a:hover {
+    background-color: #0056b3;
+}
+
+.menu:hover nav ul li a i {
+    margin-right: 10px;
+}
+
+.menu:hover nav ul li a i {
+    display: inline-block;
+    width: 20px;
+}
+
+.menu:hover nav ul li a i.fa {
+    font-size: 18px;
+}
+
+.menu:hover nav ul li a i.fas {
+    font-size: 18px;
+}
+
+.menu:hover nav ul li a i.far {
+    font-size: 18px;
+}
+
+.menu:hover nav ul li a i.fal {
+    font-size: 18px;
+}
+
+.menu:hover nav ul li a i.fab {
+    font-size: 18px;
+}
+
+.menu:hover nav ul li a i.fal {
+    font-size: 18px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav {
+    width: 220px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+nav:not([open]) {
+    width: 80px;
+}
+
+summary {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #1877f2;
+    color: #fff;
+    text-align: right;
+    border-radius: 5px;
+}
+
+summary:hover {
+    background-color: #0056b3;
+}
+
+nav ul li {
+    margin: 10px 0;
+}
+
+nav ul li a {
+
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+
+
+
+nav {
+    float: right;
+    margin-top: 10%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 1rem;
+    position: fixed;
+    width: 80%;
+    left: 80%;
+    transform: translateX(-70%);
+    top: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
 }

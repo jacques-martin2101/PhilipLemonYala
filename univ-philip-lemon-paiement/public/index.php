@@ -34,7 +34,7 @@ switch ($request) {
         // Redirection vers la page d'inscription
         header('Location: inscription_form.php');
         exit;
-        $inscriptionController = new EtudiantController( new EtudiantModel($nom, $postnom, $prenom, $email, $telephone, $doc, $niveau_etude));
+        $inscriptionController = new EtudiantController( new EtudiantModel($matricule, $nom, $postnom, $prenom, $email, $telephone, $doc, $niveau_etude));
         $inscriptionController->showForm();
         break;
     case 'rapport.php':

@@ -54,5 +54,17 @@ class Paiement {
 }
 
 class PaiementModel {
-    // Ajoute ici tes méthodes et propriétés
+    public $etudiant_id;
+    public $montant;
+
+    public function __construct($etudiant_id, $montant) {
+        $this->etudiant_id = $etudiant_id;
+        $this->montant = $montant;
+    }
+
+    public function enregistrer($conn) {
+        $stmt = $conn->prepare("INSERT INTO paiements (etudiant_id, montant) VALUES (?, ?)");
+        $stmt->bind_param("id", $this->etudiant_id, $this->montant);
+        return $stmt->execute();
+    }
 }

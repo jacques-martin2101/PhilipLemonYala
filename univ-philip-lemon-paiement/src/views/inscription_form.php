@@ -45,6 +45,7 @@ include_once 'header.php';
                     <option value="doctorat">Doctorat</option>
                 </select>
             </div><br>
+
             <button type="submit">S'inscrire</button>
         </form>
     </div>

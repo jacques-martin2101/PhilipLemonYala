@@ -4,6 +4,13 @@ namespace App\Controllers;
 namespace App\Models;
 namespace Controllers;
 
+require_once '../src/models/PaiementModel.php';
+require_once '../src/models/EtudiantModel.php';
+require_once '../config/database.php';
+
+use Models\PaiementModel;
+use Models\EtudiantModel;
+
 class PaiementController {
     private $paiementModel;
 
@@ -15,20 +22,30 @@ class PaiementController {
         include '../src/views/paiement_form.php';
     }
 
-    public function traiterPaiement($data) {
-        // Validation des données
-        if ($this->validerDonnees($data)) {
-            // Traitement du paiement
-            $resultat = $this->paiementModel->effectuerPaiement($data);
-            if ($resultat) {
-                include '../src/views/paiement_success.php';
+    public function showFormWithEtudiant($etudiant)
+    {
+        include '../src/views/paiement_form.php';
+    }
+
+    public function traiterPaiement()
+    {
+        session_start();
+        global $conn;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['etudiant_id'])) {
+            $etudiant_id = intval($_GET['etudiant_id']);
+            $montant = floatval($_POST['montant']);
+            
+
+            $paiement = new PaiementModel($etudiant_id, $montant);
+            if ($paiement->enregistrer($conn)) {
+                $_SESSION['notification'] = "Paiement enregistré avec succès.";
+                $_SESSION['notification_type'] = "success";
             } else {
-                // Gérer l'erreur de paiement
-                echo "Erreur lors du traitement du paiement.";
+                $_SESSION['notification'] = "Erreur lors de l'enregistrement du paiement.";
+                $_SESSION['notification_type'] = "error";
             }
-        } else {
-            // Gérer l'erreur de validation
-            echo "Données invalides.";
+            header("Location: paiement.php?etudiant_id=" . $etudiant_id);
+            exit;
         }
     }
 
